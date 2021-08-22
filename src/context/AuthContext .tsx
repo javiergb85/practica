@@ -1,5 +1,5 @@
 import React, {createContext, useMemo, useReducer, useCallback} from 'react';
-import {authReducer} from './AuthReducer';
+import {authReducer} from './authReducer';
 
 export interface AuthState {
   isLoggedIn: boolean;
@@ -31,6 +31,8 @@ export const AuthProvider = ({children}: any) => {
 
   const signIn = useCallback(() => dispatch({type: 'signIn'}), [dispatch]);
 
+
+  // guardar siempre los valores en useMemo para evitar que vuelva a renderizar incluso si haber cambiado los valores
   const value = useMemo<AuthContextProps>(
     () => ({authState: authState, signIn: signIn}),
     [authState, signIn],
